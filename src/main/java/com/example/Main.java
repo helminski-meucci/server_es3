@@ -2,6 +2,7 @@ package com.example;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Main {
     
@@ -11,7 +12,9 @@ public class Main {
         ServerSocket s = new ServerSocket(3000);
 
         do{
-            ClientManager ClientNuovo = new ClientManager(s.accept());
+            Socket tmp = s.accept();
+            ClientManager clientNuovo = new ClientManager(tmp);
+            clientNuovo.run();
         }while(true);
 
     }
