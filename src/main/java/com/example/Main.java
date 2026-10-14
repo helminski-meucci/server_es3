@@ -23,22 +23,27 @@ public class Main {
         BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
         PrintWriter out = new PrintWriter(sock.getOutputStream(), true);
 
-        List<Double> nums = List.of();
-        List<String> operators = List.of();
+        ArrayList<Double> nums = new ArrayList<>();
+        ArrayList<String> operators = new ArrayList<>();
         do{
             String info = in.readLine();
+            System.out.println(info);
             if(info.trim().equals("exit")) break;
             else{
-                nums.add(Double.valueOf(Double.parseDouble(info)));
+                double d = Double.parseDouble(info);
+                nums.add(Double.valueOf(d));
                 do{
                     String o = in.readLine();
+                    System.out.println(o);
                     o = o.trim();
                     if(o.trim().equals("=")) break;
                     operators.add(o);
 
                     String n = in.readLine();
+                    System.out.println(n);
                     n = n.trim();
-                    nums.add(Double.valueOf(Double.parseDouble(n)));
+                    d = Double.parseDouble(n);
+                    nums.add(Double.valueOf(d));
                 }while(true);
                 while(nums.size() > 1){
                     int pos = findNextOperationPos(operators);
@@ -53,7 +58,7 @@ public class Main {
 
     }
 
-    private static int findNextOperationPos(List<String> ops){
+    private static int findNextOperationPos(ArrayList<String> ops){
         for(String s : ops){
             if(s.equals("C3") || s.equals("D4")) return ops.indexOf(s);
         }
